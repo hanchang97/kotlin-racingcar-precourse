@@ -20,4 +20,6 @@ class RaceView {
     fun printError(errorMessage: String) {
         println("$ERROR_TAG $errorMessage")
     }
+
+    fun inputContent(): String = readLine() ?: ""
 }
