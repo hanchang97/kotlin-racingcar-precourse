@@ -2,15 +2,16 @@ package controller
 
 import model.RacingCar
 import model.Round
-import util.RacingCarMapper
-import util.RacingCarNameValidator
-import util.RacingRoundValidator
+import controller.util.RacingCarMapper
+import controller.util.RacingCarNameValidator
+import controller.util.RacingRoundValidator
+import controller.util.RandomNumberGenerator
 import view.RaceView
 
 class RaceController(
     val raceView: RaceView
 ) {
-    var racingCars = emptyList<RacingCar>()
+    var racingCars = mutableListOf<RacingCar>()
     var round = Round()
 
     fun printCarListInputMessage() {
@@ -21,6 +22,18 @@ class RaceController(
         raceView.printContent("시도할 횟수는 몇회인가요?")
     }
 
+    fun printStartGameMeesage() {
+        raceView.printContent("실행 결과")
+    }
+
+    fun printRacingCarStatus(racingCar: RacingCar) {
+        raceView.printContent("${racingCar.name} : ${racingCar.getPositionStateString()}")
+    }
+
+    fun printEnter() {
+        raceView.printContent("")
+    }
+
     fun inputAndValidateRacingCarNames() {
         var isValidationPassed = false
 
@@ -28,7 +41,7 @@ class RaceController(
             try {
                 raceView.inputContent().also { inputRacingCarNames ->
                     isValidationPassed = RacingCarNameValidator.isValidateRacingCarName(inputRacingCarNames)
-                    racingCars = RacingCarMapper.mapToRacingCars(inputRacingCarNames)
+                    racingCars = RacingCarMapper.mapToRacingCars(inputRacingCarNames).toMutableList()
                 }
             } catch (exception: IllegalStateException) {
                 raceView.printError(exception.message ?: "Error!")
@@ -40,9 +53,26 @@ class RaceController(
         while (round.totalRound <= 0) {
             try {
                 round = round.copy(totalRound = RacingRoundValidator.validateAndReturnRound(raceView.inputContent()))
+
             } catch (exception: Exception) {
                 raceView.printError(exception.message ?: "Error!")
             }
         }
+    }
+
+    fun startGame() {
+        while (round.totalRound > 0) {
+            racingCars.forEachIndexed { index, racingCar ->
+                racingCars[index] = racingCar.copy(position = racingCar.position + if (RandomNumberGenerator.generateRandomNumber() >= 4) 1 else 0)
+                printRacingCarStatus(racingCar)
+            }
+
+            round = round.copy(totalRound = round.totalRound - 1)
+            printEnter()
+        }
+    }
+
+    fun announceWinner() {
+        
     }
 }

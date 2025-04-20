@@ -1,4 +1,4 @@
-package util
+package controller.util
 
 import model.RacingCar
 

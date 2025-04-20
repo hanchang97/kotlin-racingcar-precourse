@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import util.RacingRoundValidator
+import controller.util.RacingRoundValidator
 
 class RacingRoundTest {
     @Test

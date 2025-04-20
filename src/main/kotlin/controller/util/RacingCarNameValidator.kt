@@ -1,4 +1,4 @@
-package util
+package controller.util
 
 object RacingCarNameValidator {
     fun isValidateRacingCarName(inputRacingCarNames: String): Boolean {
