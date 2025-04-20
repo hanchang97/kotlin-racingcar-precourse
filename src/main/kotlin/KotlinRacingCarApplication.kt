@@ -2,13 +2,17 @@ import controller.RaceController
 import view.RaceView
 
 fun main() {
-    val raceView = RaceView()
-    val raceController = RaceController(raceView = raceView)
+    val raceController = RaceController(raceView = RaceView())
 
-    initGame(raceController = raceController)
+    initRacingCars(raceController = raceController)
+    initRound(raceController = raceController)
 }
 
-private fun initGame(raceController: RaceController) {
+private fun initRacingCars(raceController: RaceController) {
     raceController.printCarListInputMessage()
     raceController.inputAndValidateRacingCarNames()
+}
+
+private fun initRound(raceController: RaceController) {
+
 }

@@ -25,6 +25,7 @@ class RaceController(
             try {
                 raceView.inputContent().also { inputRacingCarNames ->
                     isValidationPassed = RacingCarNameValidator.isValidateRacingCarName(inputRacingCarNames)
+                    racingCars = RacingCarMapper.mapToRacingCars(inputRacingCarNames)
                 }
             } catch (exception: IllegalStateException) {
                 raceView.printError(exception.message ?: "Error!")
