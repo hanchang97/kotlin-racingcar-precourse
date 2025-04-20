@@ -3,15 +3,12 @@ import view.RaceView
 
 fun main() {
     val raceView = RaceView()
-    val raceController = RaceController()
+    val raceController = RaceController(raceView = raceView)
 
-    initGame(
-        raceView = raceView,
-        raceController = raceController
-    )
+    initGame(raceController = raceController)
 }
 
-private fun initGame(raceView: RaceView, raceController: RaceController) {
-    raceView.printCarListInputMesage()
-    raceController.isValidateRacingCarNames(raceView.inputContent())
+private fun initGame(raceController: RaceController) {
+    raceController.printCarListInputMessage()
+    raceController.inputAndValidateRacingCarNames()
 }
