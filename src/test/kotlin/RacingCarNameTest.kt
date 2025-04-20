@@ -33,4 +33,14 @@ class RacingCarNameTest {
             RacingCarNameValidator.isValidateRacingCarName(racingCarNames)
         }
     }
+
+    @Test
+    @DisplayName("경주용 차량 정상 입력 테스트")
+    fun givenCorrectInput() {
+        val racingCarNames = "1234,123"
+
+        assert(true) {
+            RacingCarNameValidator.isValidateRacingCarName(racingCarNames)
+        }
+    }
 }

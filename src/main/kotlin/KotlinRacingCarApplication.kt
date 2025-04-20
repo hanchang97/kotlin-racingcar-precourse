@@ -14,5 +14,6 @@ private fun initRacingCars(raceController: RaceController) {
 }
 
 private fun initRound(raceController: RaceController) {
-
+    raceController.printRoundInputMesage()
+    raceController.inputAndValidateRound()
 }
