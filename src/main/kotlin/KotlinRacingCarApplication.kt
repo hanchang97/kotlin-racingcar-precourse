@@ -26,5 +26,5 @@ private fun startGame(raceController: RaceController) {
 }
 
 private fun announceWinner(raceController: RaceController) {
-
+    raceController.announceWinner()
 }

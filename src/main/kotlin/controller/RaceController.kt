@@ -23,11 +23,15 @@ class RaceController(
     }
 
     fun printStartGameMeesage() {
-        raceView.printContent("실행 결과")
+        raceView.printContent("\n실행 결과")
     }
 
     fun printRacingCarStatus(racingCar: RacingCar) {
         raceView.printContent("${racingCar.name} : ${racingCar.getPositionStateString()}")
+    }
+
+    fun printWinner(winners: List<RacingCar>) {
+        raceView.printContent("최종 우승자 : ${winners.joinToString(", ") { it.name }}")
     }
 
     fun printEnter() {
@@ -64,7 +68,7 @@ class RaceController(
         while (round.totalRound > 0) {
             racingCars.forEachIndexed { index, racingCar ->
                 racingCars[index] = racingCar.copy(position = racingCar.position + if (RandomNumberGenerator.generateRandomNumber() >= 4) 1 else 0)
-                printRacingCarStatus(racingCar)
+                printRacingCarStatus(racingCars[index])
             }
 
             round = round.copy(totalRound = round.totalRound - 1)
@@ -73,6 +77,8 @@ class RaceController(
     }
 
     fun announceWinner() {
-        
+        val winnerPosition = racingCars.maxOf { it.position }
+        val winners = racingCars.filter { it.position == winnerPosition }
+        printWinner(winners = winners)
     }
 }
